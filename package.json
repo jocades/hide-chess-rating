@@ -2,7 +2,7 @@
   "name": "chrome",
   "type": "module",
   "scripts": {
-    "build": "bun build src/main.ts src/popup.ts --outdir dist"
+    "build": "bun build src/inject.ts src/popup.ts --outdir dist"
   },
   "devDependencies": {
     "@types/bun": "latest",

@@ -10,7 +10,7 @@
   },
   "content_scripts": [
     {
-      "js": ["main.js"],
+      "js": ["inject.js"],
       "matches": ["https://lichess.org/*", "https://www.chess.com/*"]
     }
   ]

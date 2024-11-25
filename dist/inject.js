@@ -43,7 +43,7 @@ function chesscom(opts) {
   }
 }
 
-// src/main.ts
+// src/inject.ts
 (async () => {
   const opts = await get();
   toggle(opts);
