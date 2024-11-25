@@ -18,12 +18,10 @@ export function toggle(opts: Opts) {
 
 function lichess(opts: Opts) {
   const $top = document.querySelector<HTMLElement>(".ruser-top rating")!
-  if (opts.top) $top.style.display = "none"
-  else $top.style.display = "flex"
+  $top.style.display = opts.top ? "none" : "flex"
 
   const $btm = document.querySelector<HTMLElement>(".ruser-bottom rating")!
-  if (opts.btm) $btm.style.display = "none"
-  else $btm.style.display = "flex"
+  $btm.style.display = opts.btm ? "none" : "flex"
 }
 
 function chesscom(opts: Opts) {
