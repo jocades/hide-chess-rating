@@ -1,6 +1,5 @@
 {
   "name": "chrome",
-  "module": "main.ts",
   "type": "module",
   "scripts": {
     "build": "bun build src/main.ts src/popup.ts --outdir dist"
