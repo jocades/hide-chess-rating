@@ -1,0 +1,39 @@
+<html>
+  <script src="popup.js" type="module"></script>
+  <style>
+    body {
+      margin: 0;
+      width: 250px;
+      height: 250px;
+      display: grid;
+      place-content: center;
+      place-items: center;
+      background: #212121;
+      color: #fff;
+    }
+    form {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+    }
+    label {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+    }
+  </style>
+  <body>
+    <h1>Rm Rating</h1>
+    <form>
+      <label for="top">
+        <h2>Top</h2>
+        <input name="top" type="checkbox" />
+      </label>
+      <label for="btm">
+        <h2>Bottom</h2>
+        <input name="btm" type="checkbox" />
+      </label>
+    </form>
+  </body>
+</html>

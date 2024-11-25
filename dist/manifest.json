@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Hide Rating",
+  "description": "Hide the rating while playing a chess game. Clear your mind from unwanted thoughts and win your next game with a clearer mind.",
+  "version": "1.0",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "action": {
+    "default_popup": "hello.html",
+    "default_icon": "hello_extensions.png"
+  },
+  "content_scripts": [
+    {
+      "js": ["main.js"],
+      "matches": ["https://lichess.org/*", "https://www.chess.com/*"],
+      "run_at": "document_end"
+    }
+  ]
+}
