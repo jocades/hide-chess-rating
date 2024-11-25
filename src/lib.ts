@@ -11,9 +11,15 @@ export async function set(opts: Opts) {
   await chrome.storage.sync.set({ opts })
 }
 
+const siteMap: Record<string, (opts: Opts) => void> = {
+  ["https://lichess.org"]: lichess,
+  ["https://www.chess.com"]: chesscom,
+}
+
 export function toggle(opts: Opts) {
-  if (location.href.startsWith("https://lichess.org")) lichess(opts)
-  else if (location.href.startsWith("https://www.chess.com")) chesscom(opts)
+  const site = Object.keys(siteMap).find(location.href.startsWith)
+  if (!site) return
+  siteMap[site](opts)
 }
 
 function lichess(opts: Opts) {

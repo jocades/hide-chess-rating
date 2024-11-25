@@ -1,27 +1,27 @@
-// src/opts.ts
+// src/lib.ts
 async function get() {
   return (await chrome.storage.sync.get("opts")).opts;
 }
 async function set(opts) {
   await chrome.storage.sync.set({ opts });
 }
+var siteMap = {
+  ["https://lichess.org"]: lichess,
+  ["https://www.chess.com"]: chesscom
+};
 function toggle(opts) {
-  if (location.href.startsWith("https://lichess.org"))
-    lichess(opts);
-  else if (location.href.startsWith("https://www.chess.com"))
-    chesscom(opts);
+  const site = Object.keys(siteMap).find(location.href.startsWith);
+  if (!site)
+    return;
+  siteMap[site](opts);
 }
 function lichess(opts) {
   const $top = document.querySelector(".ruser-top rating");
-  if (opts.top)
-    $top.style.display = "none";
-  else
-    $top.style.display = "flex";
+  if ($top)
+    $top.style.display = opts.top ? "none" : "flex";
   const $btm = document.querySelector(".ruser-bottom rating");
-  if (opts.btm)
-    $btm.style.display = "none";
-  else
-    $btm.style.display = "flex";
+  if ($btm)
+    $btm.style.display = opts.btm ? "none" : "flex";
 }
 function chesscom(opts) {
   const css = (side, active) => `

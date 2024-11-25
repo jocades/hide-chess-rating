@@ -1,4 +1,4 @@
-import { get, set, toggle, type Opts } from "./opts"
+import { get, set, toggle, type Opts } from "./lib"
 
 const opts: Opts = {}
 const $form = document.querySelector("form")!
