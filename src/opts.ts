@@ -11,43 +11,40 @@ export async function set(opts: Opts) {
   await chrome.storage.sync.set({ opts })
 }
 
-export async function toggle(opts: Opts) {
-  console.log("tab", opts)
+export function toggle(opts: Opts) {
+  if (location.href.startsWith("https://lichess.org")) lichess(opts)
+  else if (location.href.startsWith("https://www.chess.com")) chesscom(opts)
+}
 
-  if (location.href.startsWith("https://lichess.org")) {
-    const $top = document.querySelector<HTMLElement>(".ruser-top rating")!
-    console.log($top)
-    if (opts.top) $top.style.display = "none"
-    else $top.style.display = "flex"
+function lichess(opts: Opts) {
+  const $top = document.querySelector<HTMLElement>(".ruser-top rating")!
+  if (opts.top) $top.style.display = "none"
+  else $top.style.display = "flex"
 
-    const $btm = document.querySelector<HTMLElement>(".ruser-bottom rating")!
-    if (opts.btm) $btm.style.display = "none"
-    else $btm.style.display = "flex"
+  const $btm = document.querySelector<HTMLElement>(".ruser-bottom rating")!
+  if (opts.btm) $btm.style.display = "none"
+  else $btm.style.display = "flex"
+}
+
+function chesscom(opts: Opts) {
+  const css = (side: "top" | "bottom", active?: boolean) => `
+      .player-${side} [class*=rating] { 
+        display: ${active ? "none" : "block"}; 
+      }`
+
+  const apply = (style: HTMLStyleElement) => {
+    style.innerHTML = css("top", opts.top)
+    style.innerHTML += css("bottom", opts.btm)
   }
 
-  if (location.href.startsWith("https://www.chess.com")) {
-    const $top = document.querySelector<HTMLElement>(".player-top")!
-    console.log("-> top", $top)
-    // if (opts.top) $top.style.display = "none"
-    // else $top.style.display = "block"
-
-    const observer = new MutationObserver((muts) => {
-      muts.forEach((mut) => {
-        if (!mut.addedNodes) return
-        mut.addedNodes.forEach((node) => {
-          console.log("-> added", node)
-        })
-      })
-    })
-
-    observer.observe($top, {
-      childList: true,
-      subtree: true,
-    })
-
-    const $btm = document.querySelector<HTMLElement>(".player-bottom .rating-score-rating")!
-    console.log("-> btm", $btm)
-    // if (opts.btm) $btm.style.display = "none"
-    // else $btm.style.display = "block"
+  const existing = document.head.querySelector<HTMLStyleElement>("style#rmrating")
+  if (!existing) {
+    const style = document.createElement("style")
+    style.id = "rmrating"
+    apply(style)
+    document.head.appendChild(style)
+  } else {
+    apply(existing)
   }
+  console.log(document.querySelector("style #rmrating"))
 }
