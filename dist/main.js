@@ -32,16 +32,15 @@ function chesscom(opts) {
     style.innerHTML = css("top", opts.top);
     style.innerHTML += css("bottom", opts.btm);
   };
-  const existing = document.head.querySelector("style#rmrating");
+  const existing = document.head.querySelector("style#hiderat");
   if (!existing) {
     const style = document.createElement("style");
-    style.id = "rmrating";
+    style.id = "hiderat";
     apply(style);
     document.head.appendChild(style);
   } else {
     apply(existing);
   }
-  console.log(document.querySelector("style #rmrating"));
 }
 
 // src/main.ts
