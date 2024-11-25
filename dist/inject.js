@@ -5,15 +5,15 @@ async function get() {
 async function set(opts) {
   await chrome.storage.sync.set({ opts });
 }
-var siteMap = {
+var map = {
   ["https://lichess.org"]: lichess,
   ["https://www.chess.com"]: chesscom
 };
 function toggle(opts) {
-  const site = Object.keys(siteMap).find(location.href.startsWith);
+  const site = Object.keys(map).find((k) => location.href.startsWith(k));
   if (!site)
     return;
-  siteMap[site](opts);
+  map[site](opts);
 }
 function lichess(opts) {
   const $top = document.querySelector(".ruser-top rating");
@@ -26,7 +26,7 @@ function lichess(opts) {
 function chesscom(opts) {
   const css = (side, active) => `
       .player-${side} [class*=rating] { 
-        display: ${active ? "none" : "block"}; 
+        display: ${active ? "none" : "flex"}; 
       }`;
   const apply = (style) => {
     style.innerHTML = css("top", opts.top);

@@ -11,15 +11,15 @@ export async function set(opts: Opts) {
   await chrome.storage.sync.set({ opts })
 }
 
-const siteMap: Record<string, (opts: Opts) => void> = {
+const map: Record<string, (opts: Opts) => void> = {
   ["https://lichess.org"]: lichess,
   ["https://www.chess.com"]: chesscom,
 }
 
 export function toggle(opts: Opts) {
-  const site = Object.keys(siteMap).find(location.href.startsWith)
+  const site = Object.keys(map).find((k) => location.href.startsWith(k))
   if (!site) return
-  siteMap[site](opts)
+  map[site](opts)
 }
 
 function lichess(opts: Opts) {
@@ -33,7 +33,7 @@ function lichess(opts: Opts) {
 function chesscom(opts: Opts) {
   const css = (side: "top" | "bottom", active?: boolean) => `
       .player-${side} [class*=rating] { 
-        display: ${active ? "none" : "block"}; 
+        display: ${active ? "none" : "flex"}; 
       }`
 
   const apply = (style: HTMLStyleElement) => {
