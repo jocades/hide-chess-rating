@@ -17,11 +17,11 @@ export function toggle(opts: Opts) {
 }
 
 function lichess(opts: Opts) {
-  const $top = document.querySelector<HTMLElement>(".ruser-top rating")!
-  $top.style.display = opts.top ? "none" : "flex"
+  const $top = document.querySelector<HTMLElement>(".ruser-top rating")
+  if ($top) $top.style.display = opts.top ? "none" : "flex"
 
-  const $btm = document.querySelector<HTMLElement>(".ruser-bottom rating")!
-  $btm.style.display = opts.btm ? "none" : "flex"
+  const $btm = document.querySelector<HTMLElement>(".ruser-bottom rating")
+  if ($btm) $btm.style.display = opts.btm ? "none" : "flex"
 }
 
 function chesscom(opts: Opts) {
