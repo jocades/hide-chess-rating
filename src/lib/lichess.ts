@@ -6,11 +6,10 @@ function clock(side: Side, active?: boolean) {
 }
 
 function panel(color: Color, active?: boolean) {
-  const $mask = document.querySelector<HTMLElement>(
-    `.game__meta__players .${color} .user-link span#hiderat`,
-  )
+  const selector = `.game__meta__players .${color} .user-link `
+  const $mask = document.querySelector<HTMLElement>(`${selector} span#hiderat`)
   if (!$mask) {
-    const $el = document.querySelector<HTMLElement>(`.game__meta__players .${color} .user-link`)
+    const $el = document.querySelector<HTMLElement>(selector)
     if (!$el) return
     const expr = /\(\d+\)/
     const match = $el.innerHTML.match(expr)

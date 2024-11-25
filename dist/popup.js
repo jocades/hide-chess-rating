@@ -5,9 +5,10 @@ function clock(side, active) {
     $el.style.display = active ? "none" : "";
 }
 function panel(color, active) {
-  const $mask = document.querySelector(`.game__meta__players .${color} .user-link span#hiderat`);
+  const selector = `.game__meta__players .${color} .user-link `;
+  const $mask = document.querySelector(`${selector} span#hiderat`);
   if (!$mask) {
-    const $el = document.querySelector(`.game__meta__players .${color} .user-link`);
+    const $el = document.querySelector(selector);
     if (!$el)
       return;
     const expr = /\(\d+\)/;
